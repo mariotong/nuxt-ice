@@ -15,3 +15,6 @@ dist
 
 #Build
 build
+
+#yarn
+yarn.lock
