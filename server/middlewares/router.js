@@ -2,7 +2,7 @@ import Router from 'koa-router'
 import config from '../config'
 import sha1 from 'sha1'
 import reply from '../wechat/reply'
-import wechatMiddle from '../wechat-lib/middlewares'
+import wechatMiddle from '../wechat-lib/middleware'
 
 export const router = app => {
   const router = new Router()
