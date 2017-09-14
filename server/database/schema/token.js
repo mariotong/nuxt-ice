@@ -34,6 +34,10 @@ TokenSchema.statics = {
       name: 'access_token'
     }).exec()
 
+    if (token && token.token) {
+      token.access_token = token.token
+    }
+
     return token
   },
 

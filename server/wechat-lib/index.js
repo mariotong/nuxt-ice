@@ -32,13 +32,13 @@ export default class Wechat {
   }
 
   async fetchAccessToken() {
-    const data = await this.getAccessToken()
+    let data = await this.getAccessToken()
 
     if (!this.isValidAccessToken(data)) {
-      return await this.updateAccessToken()
+      data = await this.updateAccessToken()
     }
 
-    await this.saveAccessToken()
+    await this.saveAccessToken(data)
 
     return data
   }
