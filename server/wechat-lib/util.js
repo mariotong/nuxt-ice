@@ -1,4 +1,5 @@
 import xml2js from 'xml2js'
+import template from './tpl'
 
 function parseXML (xml) {
   return new Promise((resolve, reject) => {
@@ -40,14 +41,33 @@ function formatMessage(result) {
           message[key].push(formatMessage(item[j]))
         }
       }
-
-      return message
     }
+    return message
   }
 }
 
-function tpl() {
+function tpl(content, message) {
+  let type = 'text'
 
+  if (Array.isArray(content)) {
+    type = 'news'
+  }
+
+  if (!content) {
+    content = 'Empty News'
+  }
+
+  type = content.msgType ? content.msgType : 'text'
+
+  let info = Object.assign({}, {
+    content,
+    createTime: new Date().getTime(),
+    msgType: type,
+    toUserName: message.FromUserName,
+    fromUserName: message.ToUserName
+  })
+
+  return template(info)
 }
 
 export {

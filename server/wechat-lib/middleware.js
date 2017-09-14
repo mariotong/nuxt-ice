@@ -38,28 +38,20 @@ export default function(opts, reply) {
       })
 
       const content = await util.parseXML(data)
-      const message = utile.formatMessage(content.xml)
+      const message = util.formatMessage(content.xml)
 
       ctx.weixin = message
-
-      ctx.weixin = {}
 
       await reply.apply(ctx, [ctx, next])
 
       const replyBody = ctx.body
       const msg = ctx.weixin
+      const xml = util.tpl(replyBody, msg)
 
-      console.log(content)
-      console.log(replyBody)
-      //const xml = util.tpl(replyBody, msg)
-      const xml = `<xml>
-                    <ToUserName><![CDATA[${content.xml.FromUserName[0]}]]></ToUserName>
-                    <FromUserName><![CDATA[${content.xml.ToUserName[0]}]]></FromUserName>
-                    <CreateTime>12345678</CreateTime>
-                    <MsgType><![CDATA[text]]></MsgType>
-                    <Content><![CDATA[${replyBody}]></Content>
-                  </xml>`
-      console.log(xml)
+      console.log('replyBody', replyBody)
+      console.log('msg', msg)
+      console.log('xml', xml)
+      
       ctx.status = 200
       ctx.type = 'application/xml'
       ctx.body = xml
