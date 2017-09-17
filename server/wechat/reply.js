@@ -11,17 +11,21 @@ export default async (ctx, next) => {
       mediaId: message.MediaId,
       msgType: 'image'
     }
-  } else if (message.MsgType == 'voice') {
+  } else if (message.MsgType === 'voice') {
     ctx.body = {
       msgType: 'voice',
       mediaId: message.MediaId
     }
-  } else if (message.MsgType == 'video') {
+  } else if (message.MsgType === 'video') {
     ctx.body = {
       title: message.ThumbMediaId,
       msgType: 'video',
       mediaId: message.MediaId
     }
+  } else if (message.MsgType === 'location') {
+    ctx.body = message.Location_X + ':' + message.Location_Y + ':' + message.Label
+  } else if (message.MsgType === 'link') {
+    ctx.body = message.title
   }
 
 }
