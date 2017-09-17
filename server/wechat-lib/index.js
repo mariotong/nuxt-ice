@@ -20,6 +20,16 @@ const api = {
     update: `${base}/material/update_news`,
     count: `${base}/material/get_materialcount`,
     batch: `${base}/material/batchget_material`
+  },
+  tag: {
+    create: `${base}/tags/create`,
+    fetch: `${base}/tags/get`,
+    update: `${base}/tags/update`,
+    del: `${base}/tags/delete`,
+    fetchUsers: `${base}/user/tag/get`,
+    batchTag: `${base}/tags/members/batchtagging`,
+    batchUnTag: `${base}/tags/members/batchuntagging`,
+    getTagList: `${base}/tags/getidlist`
   }
 }
 
@@ -241,6 +251,114 @@ export default class Wechat {
       method: 'POST',
       url: url,
       body: options
+    }
+  }
+
+  //创建标签
+  createTag(token, name) {
+    const form = {
+      tag: {
+        name: name
+      }
+    }
+    const url = api.tag.create + '?access_token=' + token
+
+    return {
+      method: 'POST',
+      url: url,
+      body: form
+    }
+  }
+  //标签列表
+  fetchTags(token) {
+    const url = api.tag.fetch + '?access_token=' + token
+
+    return {
+      url: url
+    }
+  }
+
+  updateTag (token, tagId, name) {
+    const form = {
+      tag: {
+        id: tagId,
+        name: name
+      }
+    }
+
+    const url = api.tag.update + '?access_token=' + token
+
+    return {
+      method: 'POST',
+      url: url,
+      body: form
+    }
+  }
+
+  delTag(token, tagId) {
+    const form = {
+      tag: {
+        id: tagId
+      }
+    }
+
+    const url = api.tag.del + '?access_token=' + token
+
+    return {
+      method: 'POST',
+      url: url,
+      body: form
+    }
+  }
+
+  fetchTagUsers(token, tagId, openId) {
+    const form = {
+      tagid: tagId,
+      next_openid: openId || ''
+    }
+
+    const url = api.tag.fetchUsers + '?access_token=' + token
+
+    return {
+      method: 'POST',
+      url: url,
+      body: form
+    }
+  }
+
+  // unTag true|false
+  batchTag(token, openIdList, tagId, unTag) {
+    //openIdList是个数组
+    const form = {
+      openid_list: openIdList,
+      tagid: tagId
+    }
+    let url = api.tag.batchTag
+
+    if (unTag) {
+      url = api.tag.batchUnTag
+    }
+
+    url += '?acess_token=' + token
+
+    return {
+      method: 'POST',
+      url: url,
+      body: form
+    }
+  }
+
+  getTagList(token, openId) {
+    const form = {
+      openid: openId
+    }
+
+    const url = api.tag.getTagList + '?access_token=' + token
+
+    return {
+      method: 'POST',
+      url: url,
+      body: form
     }
   }
 
