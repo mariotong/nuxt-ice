@@ -43,8 +43,10 @@ export const router = app => {
       }]
     }
     //图文素材
-    const data = await client.handle('uploadMaterial', 'news', news, {})
-
+    //const data = await client.handle('uploadMaterial', 'news', news, {})
+    //素材总数
+    const data = await client.handle('countMaterial')
+    console.log(data)
   })
 
   app.use(router.routes())
