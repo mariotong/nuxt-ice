@@ -30,6 +30,15 @@ const api = {
     batchTag: `${base}/tags/members/batchtagging`,
     batchUnTag: `${base}/tags/members/batchuntagging`,
     getTagList: `${base}/tags/getidlist`
+  },
+  user: {
+    remark: `${base}/user/info/updateremark`,
+    info: `${base}/user/info`,
+    batchInfo: `${base}/user/info/batchget`,
+    fetchUserList: `${base}/user/get`,
+    getBlackList: `${base}/tags/members/getblacklist`,
+    batchBlackUsers: `${base}/tags/members/batchblacklist`,
+    batchUnblackUsers: `${base}/tags/members/batchunblacklist`
   }
 }
 
@@ -359,6 +368,53 @@ export default class Wechat {
       method: 'POST',
       url: url,
       body: form
+    }
+  }
+
+  remarkUser(token, openId, remark) {
+    const form = {
+      openid: openId,
+      remark: remark
+    }
+    const url = api.user.remark + '?access_token=' + token
+
+    return {
+      method: 'POST',
+      url: url,
+      body: form
+    }
+  }
+
+  //用户信息
+  getUserInfo(token, openId, lang) {
+    const url = `${api.user.info}?access_token=${token}&openid=${openId}&lang=${lang || 'zh_CN'}`
+
+    return {
+      url: url
+    }
+  }
+
+  //批量获取用户信息
+  batchUserInfo(token, userList) {
+    const url = `${api.user.batchInfo}?access_token=${token}`
+
+    const form = {
+      user_list: userList
+    }
+
+    return {
+      method: 'POST',
+      body: form,
+      url: url
+    }
+  }
+
+  //获取用户列表
+  fetchUserList(token, openId, lang) {
+    const url = `${api.user.fetchUserList}?access_token=${token}&next_openid=${openId || ''}&lang=${lang || 'zh_CN'}`
+
+    return {
+      url: url
     }
   }
 

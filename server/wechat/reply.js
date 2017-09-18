@@ -2,9 +2,73 @@ const tip = '我是郑磊，欢迎来到我的世界\n' + '点击去往<a href="
 
 export default async (ctx, next) => {
   const message = ctx.weixin
+  let mp = require('../wechat')
+  let client = mp.getWechat()
+  //视频素材
+  // const data = await client.handle('uploadMaterial', 'video', resolve(__dirname, '../../ice.mp4'), {
+  //   type: 'video',
+  //   description: '{ "title": "haha","introduction": "heihei" }'
+  // })
+  // 永久素材
+  // const data = await client.handle('uploadMaterial', 'image', resolve(__dirname, '../../ice.jpeg'), {
+  //   type: 'image'
+  // })
+  // 临时素材
+  //const data = await client.handle('uploadMaterial', 'image', resolve(__dirname, '../../ice.jpeg'))
+  // const news = {
+  //   "articles": [{
+  //      "title": "my name is zhenglei",
+  //      "thumb_media_id": "X0Nkx8SvCoka6pfFHaMTN5BCc118QjP1oSuZjfRiaqE",
+  //      "author": "zhenglei",
+  //      "digest": "no digest",
+  //      "show_cover_pic": 1,
+  //      "content": "no content",
+  //      "content_source_url": "https://www.baidu.com"
+  //   }, {
+  //      "title": "my name is zhenglei2",
+  //      "thumb_media_id": "X0Nkx8SvCoka6pfFHaMTN5BCc118QjP1oSuZjfRiaqE",
+  //      "author": "zhenglei2",
+  //      "digest": "no digest",
+  //      "show_cover_pic": 0,
+  //      "content": "no content",
+  //      "content_source_url": "https://www.baidu.com"
+  //   }]
+  // }
+  //图文素材
+  //const data = await client.handle('uploadMaterial', 'news', news, {})
+  //素材总数
+  //const data = await client.handle('countMaterial')
 
   //问什么回什么。。。
   if (message.MsgType === 'text') {
+
+    if (message.Content === '1') {
+      let userList = [
+      {'openid':'oThawwt3rLy602Vb_hMsplBtP0mo','lang':'zh_CN'},
+      {'openid':'oThawwkxSHyeHKQ4pxg11TaRIfxE','lang':'zh_CN'},
+      {'openid':'oThawwm_McqFpAWOnlHlCqLS1vLU','lang':'zh_CN'},
+      {'openid':'oThawwvl6MI0mbgeTRHwzvhrSgM0','lang':'zh_CN'},
+      {'openid':'oThawwrgHWcM-T1v0MvBKiiEDYJw','lang':'zh_CN'},
+      {'openid':'oThawws6A4NkxXr9D0bcjBPZ5mnc','lang':'zh_CN'},
+      {'openid':'oThawwgYc4RyTVU_FeLoSxCSvsqs','lang':'zh_CN'},
+      {'openid':'oThawwlYNmoVu5wIuSE-sgGpB038','lang':'zh_CN'},
+      {'openid':'oThawwlYyWubMogLd1zjInfzWAf8','lang':'zh_CN'}]
+      const data = await client.handle('batchUserInfo', userList)
+      console.log(data)
+    } else if (message.Content === '2') {
+      const data = await client.handle('getUserInfo', 'oThawwt3rLy602Vb_hMsplBtP0mo')
+      console.log(data)
+    } else if (message.Content === '3') {
+      const data = await client.handle('fetchTags')
+      console.log(data)
+    } else if (message.Content == '4') {
+      const data = await client.handle('createTag', 'VUE')
+      console.log(data)
+    } else if (message.Content == '5') {
+      const data = await client.handle('fetchTagUsers', 2)
+      console.log(data)
+    }
+
     ctx.body = message.Content
   } else if (message.MsgType === 'image') {
     ctx.body = {
