@@ -39,9 +39,23 @@ export default async (ctx, next) => {
   //素材总数
   //const data = await client.handle('countMaterial')
 
-  //问什么回什么。。。
-  if (message.MsgType === 'text') {
 
+  if (message.MsgType === 'event') {
+    //点击事件
+    if (message.Event === 'subscribe') {
+      ctx.body = tip
+    } else if (message.Event === 'unsubscribe') {
+      console.log('取关了')
+    } else if (message.Event === 'LOCATION') {
+      ctx.body = message.Latitude + ':' + message.longitude
+    } else if (message.Event === 'view') {
+      ctx.body = message.EventKey + message.MenuId
+    } else if (message.Event === 'pic_sysphoto') {
+      ctx.body = message.SendPicsInfo.Count + ' phtots sent'
+    }
+
+  } else if (message.MsgType === 'text') {
+   //问什么回什么。。。
     if (message.Content === '1') {
       let userList = [
       {'openid':'oThawwt3rLy602Vb_hMsplBtP0mo','lang':'zh_CN'},
@@ -67,6 +81,16 @@ export default async (ctx, next) => {
     } else if (message.Content == '5') {
       const data = await client.handle('fetchTagUsers', 2)
       console.log(data)
+    } else if (message.Content == '6') {
+      const data = await client.handle('getMenu')
+      console.log(JSON.stringify(data))
+    } else if (message.Content == '7') {
+      const menu = require('./menu').default
+      await client.handle('delMenu')
+      const data = await client.handle('createMenu', menu)
+      console.log(JSON.stringify(data))
+    } else if (message.Content == '8') {
+
     }
 
     ctx.body = message.Content
