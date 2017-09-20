@@ -14,7 +14,7 @@ export default {
   },
   head () {
     return {
-      title: `测试页面`
+      title: `认证页面`
     }
   },
   beforeMount() {

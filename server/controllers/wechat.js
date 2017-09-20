@@ -19,12 +19,13 @@ export async function signature(ctx, next) {
 }
 
 export async function redirect(ctx, next) {
-  const target = config.SITE_ROOT_URL + '/oauth'
-  const scope = 'snsapi_userinfo'
+  let redirect = config.SITE_ROOT_URL + '/oauth'
+  //let redirect = 'http://mariotong.viphk.ngrok.org/oauth'
+  let scope = 'snsapi_userinfo'
   const {a, b} = ctx.query
   const params = `${a}_${b}`
 
-  const url = api.getAuthorizeURL(scope, target, params)
+  const url = api.getAuthorizeURL(scope, redirect, params)
 
   ctx.redirect(url)
 }
@@ -38,8 +39,6 @@ export async function oauth(ctx, next) {
   const params = queryParse(urlObj.query)
   const code = params.code
   const user = await api.getUserByCode(code)
-
-  console.log(user)
 
   ctx.body = {
     success: true,

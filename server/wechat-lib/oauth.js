@@ -20,7 +20,6 @@ export default class WechatOAuth {
 
     try {
       const response = await request(options)
-      console.log(response)
       return response
     } catch (error) {
       console.error(error)
@@ -29,7 +28,9 @@ export default class WechatOAuth {
 
   getAuthorizeURL(scope='snsapi_base', target, state) {
     const url = `${api.authorize}?appid=${this.appID}&redirect_uri=${encodeURIComponent(target)}&response_type=code&scope=${scope}&state=${state}#wechat_redirect`
-    console.log('授权的地址是', url)
+
+    return url
+
   }
 
   async fetchAccessToken(code) {
@@ -45,6 +46,7 @@ export default class WechatOAuth {
     const data = await this.request({
       url
     })
+    console.log('userInfo是啥来着', data)
     return data
   }
 
