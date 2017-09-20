@@ -1,4 +1,4 @@
-import { getWechat } from '../wechat'
+import { getWechat, getOAuth } from '../wechat'
 
 const client = getWechat()
 
@@ -12,4 +12,18 @@ export async function getSignatureAsync(url) {
   params.appId = client.appID
 
   return params
+}
+
+export function getAuthorizeURL(...args) {
+  const oauth = getOAuth()
+
+  return oauth.getAuthorizeURL(...args)
+}
+
+export async function getUserByCode(code) {
+  const oauth = getOAuth()
+  const data = oauth.fetchAccessToken(code)
+  const user = await oauth.getUserInfo(data.access_token, data.openid)
+
+  return user
 }
