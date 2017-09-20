@@ -21,7 +21,8 @@ export default {
     const wx = window.wx
     const url = window.location.href
 
-    this.$store.dispatch('getWechatSignture', url).then(res => {
+    console.log(this.$store)
+    this.$store.dispatch('getWechatSignature', url).then(res => {
       if(res.data.success) {
         const params = res.data.params
         wx.config({

@@ -3,7 +3,9 @@ import axios from 'axios'
 const baseUrl = ''
 
 class Services {
-  getWechatSignture(url) {
-    return axios.get(`${baseurl}/wechat-signature?url=${url}`)
+  getWechatSignature(url) {
+    return axios.get(`${baseUrl}/wechat-signature?url=${url}`)
   }
 }
+
+export default new Services()

@@ -10,19 +10,18 @@ const TicketSchema = new mongoose.Schema({
       type: Date,
       default: Date.now()
     },
-    updateAt: {
+    updatedAt: {
       type: Date,
       default: Date.now()
     }
   }
 })
 
-TicketSchema.pre('save', function(next) {
-  //如果是新增的数据
+TicketSchema.pre('save', function (next) {
   if (this.isNew) {
-    this.meta.createdAt = this.meta.updateAt = Date.now()
+    this.meta.createdAt = this.meta.updatedAt = Date.now()
   } else {
-    this.meta.updateAt = Date.now()
+    this.meta.updatedAt = Date.now()
   }
 
   next()
@@ -50,7 +49,7 @@ TicketSchema.statics = {
       ticket.ticket = data.ticket
       ticket.expires_in = data.expires_in
     } else {
-      ticket = new ticket({
+      ticket = new Ticket({
         name: 'ticket',
         ticket: data.ticket,
         expires_in: data.expires_in
@@ -63,4 +62,4 @@ TicketSchema.statics = {
   }
 }
 
-const ticket = mongoose.model('Ticket', TicketSchema)
+const Ticket = mongoose.model('Ticket', TicketSchema)

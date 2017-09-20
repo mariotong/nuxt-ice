@@ -92,12 +92,10 @@ export default class Wechat {
 
   async fetchTicket(token) {
     let data = await this.getTicket()
-
     if (!this.isValidToken(data, 'ticket')) {
       data = await this.updateTicket(token)
     }
-
-    await this.saveTicket()
+    await this.saveTicket(data)
 
     return data
   }
