@@ -1,18 +1,11 @@
 <template>
   <section class="container">
     <img src="../static/img/logo.png" alt="Nuxt.js Logo" class="logo" />
-    <h1 class="title">
-      This page is loaded from the {{ name }}
-    </h1>
-    <h2 class="info" v-if="name === 'client'">
-      Please refresh the page
-    </h2>
-    <nuxt-link class="button" to="/">
-      Home page
-    </nuxt-link>
   </section>
 </template>
 <script>
+import { mapState } from 'vuex'
+
 export default {
   asyncData ({ req }) {
     return {
@@ -21,8 +14,43 @@ export default {
   },
   head () {
     return {
-      title: `About Page (${this.name}-side)`
+      title: `测试页面`
     }
+  },
+  beforeMount() {
+    const wx = window.wx
+    const url = window.location.href
+
+    this.$store.dispatch('getWechatSignture', url).then(res => {
+      if(res.data.success) {
+        const params = res.data.params
+        wx.config({
+          debug: true,
+          appID: params.appId,
+          timestamp: params.timestamp,
+          nonceStr: params.noncestr,
+          signature: params.signature,
+          jsApiList: [
+            'onMenuShareTimeline',
+            'onMenuShareAppMessage',
+            'onMenuShareQQ',
+            'onMenuShareWeibo',
+            'onMenuShareQZone',
+            'chooseImage',
+            'previewImage',
+            'uploadImage',
+            'downloadImage',
+            'hideAllNonBaseMenuItem',
+            'showAllNonBaseMenuItem'
+          ]
+        })
+
+        wx.ready(() => {
+          wx.hideAllNonBaseMenuItem()
+          console.log('success')
+        })
+      }
+    })
   }
 }
 </script>
