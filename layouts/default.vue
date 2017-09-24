@@ -5,7 +5,7 @@
     v-nav
 </template>
 <script>
-import vNav from '~components/nav.vue'
+import vNav from '~/components/nav.vue'
 
 export default {
   components: {

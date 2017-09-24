@@ -69,4 +69,4 @@ export default {
 
 </script>
 
-<style scoped lang="sass" src="~static/sass/index.sass"></style>
+<style scoped lang="sass" src="~/static/sass/index.sass"></style>
