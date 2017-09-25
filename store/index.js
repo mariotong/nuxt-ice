@@ -11,7 +11,8 @@ const createStore = () => {
       cities: [],
       characters: [],
       currentHouse: {},
-      currentCharacter: {}
+      currentCharacter: {},
+      products: {}
     },
     getters,
     actions,
