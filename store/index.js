@@ -3,18 +3,11 @@ import Vuex from 'vuex'
 import actions from './actions'
 import getters from './getters'
 import mutations from './mutations'
+import state from './state'
 
 const createStore = () => {
   return new Vuex.Store({
-    state: {
-      houses: [],
-      cities: [],
-      characters: [],
-      currentHouse: {},
-      currentCharacter: {},
-      products: {},
-      currentProduct: {}
-    },
+    state,
     getters,
     actions,
     mutations
