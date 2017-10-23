@@ -7,4 +7,4 @@ require('babel-core/register')({
 
 require('babel-polyfill')
 
-require('./server/crawler/imdb.js')
+require('./server/crawler/wiki.js')
