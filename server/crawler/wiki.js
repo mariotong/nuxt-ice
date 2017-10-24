@@ -4,6 +4,8 @@ import R from 'ramda'
 import _ from 'lodash'
 import { resolve } from 'path'
 import { writeFileSync } from 'fs'
+import { fetchImage } from '../libs/qiniu'
+import randomToken from 'random-token'
 
 const sleep = time => new Promise(resolve => setTimeout(resolve, time))
 
@@ -126,4 +128,43 @@ function checkFinalCharacterCount() {
   console.log(data.length)
 }
 
-checkFinalCharacterCount()
+//checkFinalCharacterCount()
+
+export const fetchImageFromIMDb = async () => {
+  let IMDbCharacters = require(resolve(__dirname, '../../finalCharacters.json'))
+
+  IMDbCharacters = R.map(async item => {
+    try {
+      let key = `${item.nmId}/${randomToken(32)}`
+      await fetchImage(item.profile, key)
+
+      console.log(key)
+      console.log(item.profile)
+      console.log('ipload done!')
+
+      item.profile = key
+
+      for (let i = 0; i< item.images.length; i++) {
+        let _key = `${item.name}/${randomToken(32)}`
+        await fetchImage(item.images[i], _key)
+
+        console.log(_key)
+        console.log(item.images[i])
+
+        await sleep(100)
+
+        item.images[i] = _key
+      }
+
+      return item
+    } catch(e) {
+      console.log(e)
+    }
+  })(IMDbCharacters)
+
+  IMDbCharacters = await Promise.all(IMDbCharacters)
+
+  writeFileSync('./completeCharacters.json', JSON.stringify(IMDbCharacters, null, 2), 'utf8')
+}
+
+fetchImageFromIMDb()
