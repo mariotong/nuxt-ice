@@ -2,6 +2,7 @@ import mongoose from 'mongoose'
 import config from '../config'
 import fs from 'fs'
 import { resolve } from 'path'
+import R from 'ramda'
 
 const models = resolve(__dirname, '../database/schema')
 
@@ -9,6 +10,14 @@ fs.readdirSync(models)
   .filter(file => ~file.search(/^[^\.].*js$/))
   .forEach(file => require(resolve(models, file)))
 
+const formatData = R.map(i => {
+  i._id = i.nmId
+  return i
+})
+
+let wikiCharacters = require(resolve(__dirname, '../../completeCharacters.json'))
+let wikiHouses = require(resolve(__dirname, '../../completeHouses.json'))
+wikiCharacters = formatData(wikiCharacters)
 
 export const database = app => {
   mongoose.set('debug', true)
@@ -23,7 +32,18 @@ export const database = app => {
     console.error(err)
   })
 
-  mongoose.connection.on('open', () => {
+  mongoose.connection.on('open', async () => {
     console.log('Connected to MongoDB', config.db)
+
+
+    const WikiHouse = mongoose.model('WikiHouse')
+    const WikiCharacter = mongoose.model('WikiCharacter')
+
+    const existWikiHouses = await WikiHouse.find({}).exec()
+    const existWikiCharacters = await WikiCharacter.find({}).exec()
+
+    if(!existWikiHouses.length) WikiHouse.insertMany(wikiHouses)
+    if(!existWikiCharacters.length) WikiCharacter.insertMany(wikiCharacters)
+
   })
 }
