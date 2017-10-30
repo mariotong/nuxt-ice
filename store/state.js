@@ -6,5 +6,6 @@ export default {
   currentCharacter: {},
   products: {},
   currentProduct: {},
-  user: null
+  user: null,
+  imageCDN: 'http://oy9al01jo.bkt.clouddn.com/'
 }
