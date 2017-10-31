@@ -18,9 +18,10 @@ export async function getHouse(_id) {
     _id
   }).populate({
     path: 'swornMembers.character',
-    select: '_id name cname nmId'
+    select: '_id name cname profile nmId'
   }).exec()
 
+  console.log(data.swornMembers[0].character)
   return data
 }
 
@@ -34,6 +35,5 @@ export async function getCharacter(_id) {
   const data = await WikiCharacter.findOne({
     _id
   }).exec()
-
   return data
 }
