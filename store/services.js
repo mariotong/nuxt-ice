@@ -22,19 +22,12 @@ class Services {
 
 
   fetchCharacters() {
-    //return axios.get(`${baseUrl}/wiki/characters`)
-    return {data: {data: [], success: true}}
+    return axios.get(`${baseUrl}/wiki/characters`)
   }
 
 
   fetchCharacter(id) {
-    //return axios.get(`${baseUrl}/wiki/characters/${id}`)
-    return {data: {data: [], success: true}}
-  }
-
-  fetchCities() {
-    //return axios.get(`${baseUrl}/wiki/cities`)
-    return {data: {data: [], success: true}}
+    return axios.get(`${baseUrl}/wiki/characters/${id}`)
   }
 
   fetchProducts() {

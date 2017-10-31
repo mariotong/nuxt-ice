@@ -13,7 +13,7 @@
       .title 主要人物
       .section
         .items(v-for="(item, index) in characters" :key="index" @click="showCharacter(item)")
-          img(:src="item.profile")
+          img(:src="imageCDN + item.profile + detailImgApi")
           .desc
             .cname {{item.name}}
             .name {{item.cname}}
@@ -41,13 +41,13 @@ export default {
       'houses',
       'characters',
       'cities',
-      'imageCDN'
+      'imageCDN',
+      'detailImgApi'
     ])
   },
   beforeCreate() {
     this.$store.dispatch('fetchHouses')
     this.$store.dispatch('fetchCharacters')
-    //this.$store.dispatch('fetchCities')
   },
   methods: {
     showHouse(item) {
