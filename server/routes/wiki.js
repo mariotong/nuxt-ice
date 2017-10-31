@@ -1,30 +1,17 @@
 import Router from 'koa-router'
-import mongoose from 'mongoose'
 import {controller, get, post} from '../decorator/router'
-import config from '../config'
-import { resolve } from 'path'
-import { signature, redirect, oauth } from '../controllers/wechat'
-
-const WikiHouse = mongoose.model('WikiHouse')
-const WikiCharacter = mongoose.model('WikiCharacter')
+import api from '../api'
 
 @controller('/wiki')
 export class WikiController {
 
   @get('/houses')
   async getHouses(ctx, next) {
-    const data = await WikiHouse.find({}).populate({
-      path: 'swornMembers.character',
-      select: '_id name cname profile'
-    }).exec()
-
-    console.log('houses', data[0].swornMembers[0].character)
-
+    const data = await api.wiki.getHouses()
     ctx.body = {
       data: data,
       success: true
     }
-
   }
 
   @get('/houses/:_id')
@@ -40,14 +27,7 @@ export class WikiController {
       return
     }
 
-    const data = await WikiHouse.findOne({
-      _id
-    }).populate({
-      path: 'swornMembers.character',
-      select: '_id name cname nmId'
-    }).exec()
-
-    console.log('house', data[0])
+    const data = await api.wiki.getHouse(_id)
 
     ctx.body = {
       data: data,
@@ -58,7 +38,7 @@ export class WikiController {
   @get('/characters')
   async getCharacters(ctx, next) {
     const {limit = 20} = ctx.query
-    const data = await WikiCharacter.find({}).limit(Number(limit)).exec()
+    const data = await api.wiki.getCharacters(limit)
 
     ctx.body = {
       data: data,
@@ -80,9 +60,7 @@ export class WikiController {
       return
     }
 
-    const data = await WikiCharacter.findOne({
-      _id
-    }).exec()
+    const data = await api.wiki.getCharacter(_id)
 
     ctx.body = {
       data: data,
