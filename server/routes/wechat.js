@@ -1,4 +1,3 @@
-import Router from 'koa-router'
 import {controller, get, post} from '../decorator/router'
 import config from '../config'
 import { resolve } from 'path'

@@ -1,0 +1,766 @@
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>师徒计划</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="keywords" content="" />
+  <meta name="description" content="" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="wap-font-scale" content="no" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  <meta name="format-detection" content="telephone=no, email=no" />
+  <script type="text/javascript" src="https://cdn.bootcss.com/zepto/1.2.0/zepto.min.js"></script>
+  <script type="text/javascript" src="https://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+  <script type="text/javascript" src="https://p3.ifengimg.com/a/2016/1021/shareweixin_20161021.js"></script>
+</head>
+<style>
+* { -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box;}
+html{background-color: #fff;height:100%;overflow:hidden;}
+html, body, div, section, article, aside, header, hgroup, footer, nav, h1, h2, h3, h4, h5, h6, p, blockquote, address, time, span, em, strong, img, ol, ul, li, figure, canvas, video, th, td, tr, input, textarea{margin: 0; padding: 0; border: 0; list-style: none; outline: 0;}
+address, article, aside, canvas, details, figcaption, figure, footer, header, hgroup, nav, menu, nav, section, summary {display: block;}
+body{background-repeat: no-repeat; background-position: center top;background-image: none;Font-family: Helvetica, Tahoma, Arial, "Microsoft YaHei", "微软雅黑", SimSun, "宋体", Heiti, "黑体", sans-serif;margin: 0 auto; text-align:left;line-height: 1.6; background:#efefef;height:100%;overflow:hidden;-webkit-tap-highlight-color: transparent;-webkit-user-select:none}
+a{-webkit-tap-highlight-color: transparent;-webkit-user-select:none}
+img { max-width: 100%; border:none; height: auto; width: auto }
+#myApp {height: 100%; width: 100%;overflow: scroll;background:#fff;}
+#myApp img {width: 100%; height:100%;}
+.content {padding: .34rem 0 1rem; width:100%; height:auto; background: url(https://p1.ifengimg.com/redbag/images/shitubg.png) no-repeat; background-size: 100% auto;}
+.content .title {width: 6.77rem; height: 3.85rem; margin: 0 auto;}
+.register, #mask .container{width: 6.5rem; height: auto;padding: 0 .5rem; background: #fff; margin: .4rem auto .6rem; border-radius: .2rem;}
+.input { height:1.02rem; line-height: 1.02rem; border-top: 1px solid #ffaf56;}
+input {width: 100%; height: 100%; line-height: 100%;font-size: .36rem;}
+.input.code input {width: 61.5%; display: inline-block; float: left;}
+.input.code span {margin-top: .2rem; width: 2rem; display: inline-block; height:.6rem; background: #ffaf56; font-size: .24rem; line-height: .6rem; text-align: center; color: #fff; border-radius: .15rem;}
+.input.num {border: none;}
+.input.code {border: none;}
+.input.code .no {background: #acacac;}
+.content .button {width: 6.5rem; margin: 0 auto; height:1rem; border-radius: .5rem; background: #ffaf56; text-align: center; line-height: 1rem; font-size: .4rem; color: #fff;}
+#account {width:100%; background: #fff; height:auto;}
+#account li {width:100%;box-sizing: border-box;position:relative; font-size:.28rem;padding: 0 .4rem; background:#fff; height:1rem; border-bottom: 1px solid #ededed;}
+#account .imgContainer {margin-top:.2rem; width:.6rem; float:left; height:.6rem; background: #111; border-radius:50%; overflow: hidden;}
+#account .txt-wrap {float:left;/*line-height: 1rem;*/margin-left:.1rem;width:4rem;overflow: hidden;}
+#account .name, #account .time{display:block;line-height: .4rem;text-overflow:ellipsis;white-space: nowrap;}
+#account .name{padding-top:.15rem;}
+#account .time{color:#999;font-size:.2rem;}
+#account .money {float:right;line-height: 1rem; position:absolute; right:.4rem;}
+#account .money strong{font-size:.36rem; color:#f24548;margin: 0 .1rem; }
+#account:empty{display:none;}
+#mask {position: fixed; z-index:100; top: 0; left: 0; bottom:0; right:0;width: 100%; height: 100%; background: rgba(0, 0, 0, 0.6)}
+#mask .container, #mask .tip {position: fixed; top:50%; left:50%; margin-left: -2.715rem; margin-top: -2.085rem; width:5.43rem; height: auto; background: #fff; border-radius: .3rem; padding: .75rem .5rem .6rem;}
+#mask p {font-size:.32rem;  color: #333; line-height: .32rem; font-weight: bold;}
+#mask .input.code {margin-top: .3rem; height: .96rem; overflow: hidden; border-radius: .1rem;line-height: .96rem; border: 1px solid #ddd;}
+#mask .input.code input {width: 58%; padding-left: .1rem;}
+#mask #authImg {height: .7rem; width:1.7rem;margin-top: .1rem;}
+#mask #sure, #mask #know {width:100%; margin-top:.44rem; line-height:.8rem; height:.8rem; color:#fff; background: #f54343; font-size:.34rem;text-align:center;border-radius:.4rem;}
+#mask .tip .tipText {text-align:center;}
+.i-luck {position: fixed; top: 0; left: 0; bottom: 0; right: 0; z-index: 1000;}
+.i-mask, .loadingMask {width: 100%;height: 100%;background: rgba(0, 0, 0, 0.75);position: fixed;top: 0;left: 0;bottom: 0;right: 0;z-index: -1;}
+.i-reward {width: 7.04rem;height: 8.89rem;background: url(https://p1.ifengimg.com/redbag/images/redbag-bg-1.png) center center no-repeat;background-size: 100%;margin: .5rem auto 0 auto;padding: 4.5rem 1.1rem 0 1.1rem;  position: relative;text-align: center;color: #fff;}
+.i-reward h6 {font-size: .5rem; margin-bottom: .3rem;}
+.i-reward p {font-size: .32rem; line-height: 1.3;}
+.i-reward-btn {text-align: center;font-size:.32rem; height: .78rem;line-height: .78rem;width: 3.95rem;background: #fdce57;color: #fff;border-radius: 5px;margin: .35rem auto .2rem auto;}
+.i-reward-close {font-size: .24rem;}
+.loadEffect{width: 100px;height: 100px;position: relative;margin: 0 auto;margin-top:4rem;}
+.loadEffect span{display: inline-block;width: 16px;height: 16px;border-radius: 50%;background: #f24548;position: absolute;-webkit-animation: load 1.04s ease infinite;}
+@-webkit-keyframes load{0%{opacity: 1;}100%{opacity: 0.2;}}
+.loadEffect span:nth-child(1){left: 0;top: 50%;  margin-top:-8px;  -webkit-animation-delay:0.13s;}
+.loadEffect span:nth-child(2){left: 14px;top: 14px;  -webkit-animation-delay:0.26s;}
+.loadEffect span:nth-child(3){left: 50%;top: 0;margin-left: -8px;-webkit-animation-delay:0.39s;}
+.loadEffect span:nth-child(4){top: 14px;right:14px;-webkit-animation-delay:0.52s;}
+.loadEffect span:nth-child(5){right: 0;top: 50%;margin-top:-8px;-webkit-animation-delay:0.65s;}
+.loadEffect span:nth-child(6){right: 14px;bottom:14px;-webkit-animation-delay:0.78s;}
+.loadEffect span:nth-child(7){bottom: 0;left: 50%;margin-left: -8px;-webkit-animation-delay:0.91s;}
+.loadEffect span:nth-child(8){bottom: 14px;left: 14px;-webkit-animation-delay:1.04s;}
+.loadingMask {z-index: 10; background: rgba(0,0,0,0)}
+.content .logo {width:3rem; height:.56rem; margin: 0 auto .2rem; }
+.accountTitle {width: 3.5rem; height:.38rem; margin: .25rem auto;}
+</style>
+<script>
+(function (doc, win) {
+    var _root = doc.documentElement,
+        resizeEvent = 'orientationchange' in window ? 'orientationchange' : 'resize',
+        resizeCallback = function () {
+            var clientWidth = _root.clientWidth,
+                fontSize = 10*10;
+            if (!clientWidth) return;
+            if(clientWidth < 1080) {
+                fontSize = 100*(clientWidth / 750);
+            } else {
+                fontSize = 100*(1080 / 750);
+            }
+            _root.style.fontSize = fontSize + 'px';
+        };
+    if (!doc.addEventListener) return;
+    win.addEventListener(resizeEvent, resizeCallback, false);
+    doc.addEventListener('DOMContentLoaded', resizeCallback, false);
+})(document, window);
+</script>
+<body>
+  <div id="myApp">
+    <div class="content">
+      <div class="logo">
+        <img src="https://p1.ifengimg.com/redbag/images/shitulogo.png"/>
+      </div>
+      <div class="title">
+        <img src="https://p1.ifengimg.com/redbag/images/shitutitle.png"/>
+      </div>
+      <div class="register">
+        <div class="input num">
+          <input id="mobile" type="number" placeholder="请输入您的手机号"/>
+        </div>
+        <div id="display" style="display:none">
+          <div class="input code">
+            <input id="codeNum" type="text" placeholder="请输入短信验证码"/>
+            <span id="reSendCode" style="display:none">再次发送</span>
+            <span id="waitResend"class="no">再过<strong id="time">60</strong>s发送</span>
+          </div>
+          <div class="input pw">
+            <input id="password" type="password" placeholder="请设置密码"/>
+          </div>
+        </div>
+      </div>
+      <div id="next" class="button">立即注册领取1-200元现金</div>
+      <div id="register" style="display:none" class="button">立即注册领红包</div>
+    </div>
+    <div id="mask" style="display:none;">
+      <div class="container" style="display:none">
+        <p>为您的手机安全, 请输入图形码</p>
+        <div class="input code">
+          <input id="auth" placeholder="请输入图形码"/>
+          <span id="authImg"></span>
+        </div>
+        <div id="sure" class="button">确定</div>
+      </div>
+      <div class="tip" style="display:none">
+        <p class="tipText"></p>
+        <div id="know" class="button">确定</div>
+      </div>
+    </div>
+    <div class="i-luck" style="display:none;">
+      <div class="i-mask"></div>
+      <div class="i-reward">
+          <h6>注册成功</h6>
+          <p>1-200元红包已经到账</p>
+          <p>打开凤凰新闻客户端即可领取</p>
+          <div class="i-reward-btn">立即下载，领取红包</div>
+          <div class="i-reward-close">关闭</div>
+      </div>
+    </div>
+    <div class="loadingMask" style="display:none;">
+      <div class="loadEffect">
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+      </div>
+    </div>
+    <div class="accountTitle">
+      <img src="https://p1.ifengimg.com/redbag/images/shitutitle2.png"/>
+    </div>
+    <ul id="account"></ul>
+  </div>
+</body>
+</html>
+<script>
+$(function() {
+  //params of location.search
+  var params = (function() {
+   var query = location.search;
+   var reg = /([^?=&\s]+)[=\s]*([^?=&\s]*)/g;
+   var obj = {};
+   while(reg.exec(query)){
+       obj[RegExp.$1] = RegExp.$2;
+   }
+   return obj
+  })()
+
+  $.ajax({
+    type: 'GET',
+    dataType: "jsonp",
+    url: "https://user.iclient.ifeng.com/Redpack_Api_GetRecordsForShare/do",
+    success: function(data) {
+      intervalFn(data.data.withdraw_user_list)
+    }
+  })
+
+
+  var GUID = params.guid;
+  var COUPON;
+  var USERIMG;
+  var NICKNAME;
+
+  showLoading()
+  $.ajax({
+    type: 'GET',
+    dataType: "jsonp",
+    url: "https://user.iclient.ifeng.com/pyramid_Wxshare/apiForSharePages?guid="+ GUID,
+    success: function(data) {
+      hideLoading()
+      COUPON = data.data.coupon;
+      USERIMG = data.data.user_info.userimg;
+      NICKNAME = data.data.user_info.nickname;
+      wxShare()
+    }
+  })
+
+  //微信分享
+  //微信分享功能
+  function wxShare () {
+    var name = NICKNAME ? NICKNAME : '好友';
+    var img = USERIMG ? USERIMG : 'https://p1.ifengimg.com/a80c2beeeff78280/2017/24/s.png';
+    var title =  name + '在凤凰新闻送你1~200元现金，看新闻就能赚钱';
+    var dec = '不是优惠，是真的现金！';
+    sharetitle= title;
+    sharelink=  location.href;
+    shareimgUrl=  img;
+    sharedesc= dec;
+    shareTimeline = title;
+    weixinshare()
+    footerShare({
+      title: title,
+      thumb: shareimgUrl,
+      desc: dec,
+      url: sharelink
+    })
+  }
+
+  function footerShare(options) {
+    if (!options) return;
+    let node = document.createElement('div');
+    let shareBody = document.querySelector('.ifeng_share');
+    if (shareBody) {
+        node = shareBody;
+    }
+
+    let template = '<div id="ifeng_share_thumbnail">'+ options.thumb + '</div>' +
+      '<div id="ifeng_share_title">'+ options.title + '</div>' +
+      '<div id="ifeng_share_description">'+ options.desc + '</div>' +
+      '<div id="ifeng_share_url">'+ options.url + '</div>'
+    ;
+    node.className = 'ifeng_share';
+    node.style.display = 'none';
+    node.innerHTML = template;
+    document.body.appendChild(node);
+ }
+ setTimeout(function(){wxShare()},500);//
+
+  //time format
+  function getDateDiff(dateTimeStamp){
+    var minute = 1000 * 60;
+    var hour = minute * 60;
+    var day = hour * 24;
+    var halfamonth = day * 15;
+    var month = day * 30;
+    var now = new Date();
+    var nowStr = now.getTime();
+    var today=new Date(now.getFullYear()+'/'+(now.getMonth()+1)+'/'+now.getDate()+' 00:00:00').getTime();
+    var yestoday=today-86400000;
+    var befyestoday=yestoday-86400000;
+//    var now=new Date(new Date().getFullYear()+'/'+(new Date().getMonth()+1)+'/'+new Date().getDate()+' 00:00:00').getTime();
+
+    var diffValue = nowStr - dateTimeStamp*1000;
+    var monthC =diffValue/month;
+    var weekC =diffValue/(7*day);
+    var dayC =diffValue/day;
+    var hourC =diffValue/hour;
+    var minC =diffValue/minute;
+    var result='';
+    if(diffValue<0){//time error
+      return;
+    }
+    if(dateTimeStamp*1000>=today){
+      //today
+      if(hourC>=1){
+        result=""+parseInt(hourC)+'小时前'
+      }else if(minC>=1){
+        result=""+parseInt(minC)+'分钟前'
+      }else{
+        result="刚刚";
+      }
+    }else if(dateTimeStamp*1000>=yestoday){
+      //昨天
+      result="昨天";
+    }else if(dateTimeStamp*1000>=befyestoday){
+      //前天
+      result="前天";
+    }else{
+      //大于前天
+      var time=new Date(dateTimeStamp*1000);
+      result=""+(time.getMonth()+1)+"月"+time.getDate()+"日";
+    }
+    return result;
+  }
+  //income storage
+  var incomes=(function(){
+    var hasIncome=params.income;
+    if(!hasIncome||!hasIncome.length){
+      return [];
+    }else{
+      var incomeArr=[];
+      var titleArr=[{tag:1,title:'集齐凤凰令平分金额'},{tag:2,title:'收徒成功领取'},{tag:3,title:'打开推送获得'},{tag:4,title:'获得私信收益'},{tag:5,title:'领取每日红包'}];
+      hasIncome.split(/\,+/).forEach(function(ele,index){
+        var arr=ele.split('_');
+        titleArr.forEach(function(item,cindex){
+          var obj={};
+          if(item.tag==arr[1]){
+            obj={tag:item.tag,num:arr[0],title:item.title,time:arr[2]};
+            incomeArr.push(obj);
+          }
+        });
+     })
+      return incomeArr;
+    }
+  })();
+
+  //统计,拉起相关代码
+  // 默认
+ var download = 'https://a.app.qq.com/o/simple.jsp?pkgname=com.ifeng.news2&ckey=CK1367867809902';
+ var stopover = 'https://statistics.appstore.ifeng.com/index.php/api/godownload?app_id=4&d_ch=8095';
+ var id = 'yhbyhb';
+ var type = 'h5';
+
+ function statistics(param) {
+    var time = "";
+    var baseUrl = '';
+    if(param.page) {
+      var session = time + '#page#type='+ param.page.type +'$id='+ param.page.id +'$url='+ param.page.url
+    }
+    if (param.action) {
+      var session = time + '#action#type='+ param.action.type +'$ref='+ param.action.ref
+    }
+    var encodeSession = encodeURIComponent(session);
+    var url = baseUrl + encodeSession;
+    $('body').append('<img style="display:none" src="'+ url +'"/>')
+  }
+
+
+  // 一进来发page统计,需要type,id,和url
+  // 手凤 底部
+  if (params.sf_from == 'top') {
+    download = 'http://a.app.qq.com/o/simple.jsp?pkgname=com.ifeng.news2&ckey=CK1367873683475';
+    stopover = 'https://statistics.appstore.ifeng.com/index.php/api/godownload?app_id=4&d_ch=7637';
+  } else if (params.sf_from == 'bottom_right') {
+    // 手风 右下角 浮层
+    download = 'http://a.app.qq.com/o/simple.jsp?pkgname=com.ifeng.news2&ckey=CK1367873492274';
+    stopover = 'https://statistics.appstore.ifeng.com/index.php/api/godownload?app_id=4&d_ch=1927';
+
+  } else if (params.sf_from == 'shareswiper') {
+    // 分享页面 顶部
+    id = 'hbsmy1';
+    download = 'http://a.app.qq.com/o/simple.jsp?pkgname=com.ifeng.news2&ckey=CK1350396046318';
+    stopover = 'https://statistics.appstore.ifeng.com/index.php/api/godownload?app_id=4&d_ch=7481';
+  } else if (params.sf_from == 'sharered') {
+    // 分享页面 右下角 浮层
+    id = 'hbsmy2';
+    download = 'http://a.app.qq.com/o/simple.jsp?pkgname=com.ifeng.news2&ckey=CK1352745692728';
+    stopover = 'https://statistics.appstore.ifeng.com/index.php/api/godownload?app_id=4&d_ch=1924';
+  } else if (params.sf_from == 'yk') {
+    // 优酷
+    id = 'stjh_qd';
+    download = 'http://a.app.qq.com/o/simple.jsp?pkgname=com.ifeng.news2&ckey=CK1368016021749';
+    stopover = 'https://statistics.appstore.ifeng.com/index.php/api/godownload?app_id=4&d_ch=8102';
+  }
+
+  //下载唤起App
+  function upApp () {
+    var loadOpen = {
+      download_new: download, //应用宝地址
+      stopover: stopover, //下载中转页
+      uc_stopover: 'https://p2.ifengimg.com/a/2017/0425/uc_down.html?', //uc 下载中转页
+
+      kind: 'inter_yhbyxz',
+      type: 'list',
+      callPro: function () { // 协议
+        return 'comifengnewsclient://call?type=' + this.type + '&kind=' + this.kind
+      },
+      callProIos: function () { // ios 协议
+        return 'https://api.iclient.ifeng.com/' + 'wakeupiOS/ifengnews' + '/call?toExpolre=1&fromtype=sfweb&type=' + this.type + '&kind=' + this.kind
+      },
+
+      ua: navigator.userAgent,
+      weixin: navigator.userAgent.match(/MicroMessenger/ig),
+      QQ: navigator.userAgent.match(/QQ\//),
+      PC: !/iphone|ipod|ipad|android/ig.test(navigator.userAgent),
+      isWeibo: navigator.userAgent.match(/WeiBo/i),
+      isAndroid: navigator.userAgent.match(/android/ig),
+      isIos: navigator.userAgent.match(/iphone|ipod/ig),
+      isIpad: navigator.userAgent.match(/ipad/ig),
+      wxosEdition: function () { // 判断IOS版本
+        var reg = /([1-9]?[0-9])_([0-9])/ig;
+        var iosarr = reg.exec(this.ua);
+        if (iosarr != null && iosarr.length >= 3) {
+          var wxosEdition = iosarr[1];
+        } else {
+          var wxosEdition = 0;
+        }
+        return wxosEdition;
+      },
+      publicClientAuto: function (host) {
+        if (this.ua.indexOf("UCBrowser") > 0) {
+          location.href = this.uc_stopover + host; //下载地址
+        } else if (this.ua.indexOf("Chrome") > -1 && this.ua.indexOf("MQQBrowser") < 0) { //chrome
+          location.href = host;
+        } else if (this.isIos || this.isIpad) { //ios
+          location.href = host;
+        } else if (this.ua.indexOf("MQQBrowser") > 0) { //qq
+          location.href = host;
+        } else {
+          var ifr = document.createElement("iframe");
+          ifr.src = host;
+          ifr.style.display = "none";
+          document.body.appendChild(ifr);
+        }
+      },
+      init: function () {
+        var wxosEdition = this.wxosEdition(); //ios系统
+        if (this.isIos) { // ios
+          if (wxosEdition >= 9) { // ios>=9
+            location.href = this.callProIos();
+          } else { // ios<9
+            if (this.weixin || this.QQ || this.isWeibo) { // ios<9 wx qq weibo
+              location.href = this.download_new + '&android_scheme=' + encodeURIComponent(this.download_new);
+            } else { // ios<9 browsers
+              this.publicClientAuto(this.callPro());
+              if (this.ua.indexOf("UCBrowser") < 0) { //除uc以外
+                var that = this;
+                setTimeout(function () {
+                  if (document.hasFocus()) {
+                    location.href = that.stopover; //下载地址
+                  }
+                }, 1000);
+              }
+            }
+          }
+        } else { // android
+          if (this.weixin || this.QQ || this.isWeibo) { // android wx qq weibo,跳应用宝
+            location.href = this.download_new + '&android_scheme=' + encodeURIComponent(this.callPro());
+          } else { // browsers other
+            this.publicClientAuto(this.callPro());
+            if (this.ua.indexOf("UCBrowser") < 0) { //除uc以外
+              var that = this;
+              setTimeout(function () {
+                if (document.hasFocus()) {
+                  location.href = that.stopover; //下载地址
+                }
+              }, 1000);
+            }
+          }
+        }
+      }
+    }
+    loadOpen.init()
+  }
+
+  // 一进来发page统计,需要type,id,和url
+  statistics({
+    page: {
+      type: type,
+      id: id,
+      url: location.href
+    }
+  })
+
+  function checkMobile(mobile, callback) {
+    //检测手机号存不存在
+    $.ajax({
+      type: 'GET',
+      dataType: "jsonp",
+      url: "https://id.ifeng.com/api/checkMobile?u="+ mobile + "&so=7",
+      success: callback
+    })
+  }
+
+
+  function sendMsg(mobile, auth, cb) {
+    //发送信息
+    $.ajax({
+      type: 'GET',
+      dataType: "jsonp",
+      url: "https://id.ifeng.com/api/sendmsg?mobile=" + mobile + "&auth=" + auth + "&so=7",
+      success: cb
+    })
+  }
+
+  function closeTip() {
+    $('#mask').hide()
+    $('#mask .tip').hide()
+  }
+
+  function showTip(text, cb) {
+    $('#mask').show()
+    $('#mask .container').hide()
+    $('#mask .tip').show().find('.tipText').text(text)
+    $('#know').on('click', function() {
+      closeTip();
+      cb && cb()
+    })
+  }
+
+  function showContainer() {
+    changeImg()
+    $('#mask').show()
+    $('#mask .tip').hide()
+    $('#mask .container').show()
+  }
+
+  function closeContainer() {
+    $('#mask').hide()
+    $('#mask .container').hide()
+  }
+
+ function showLoading() {
+   $('.loadingMask').show()
+ }
+
+ function hideLoading() {
+   $('.loadingMask').hide()
+ }
+
+  function registerNum(mobile, codeNum, password, cb) {
+    //注册手机
+    $.ajax({
+      type: 'GET',
+      dataType: "jsonp",
+      url: "https://id.ifeng.com/api/mobileregister?&u="+ mobile + "&k="+ password +"&cert="+ codeNum +"&so=7",
+      success: cb
+    })
+  }
+
+  function checkIsGet(cb) {
+    var mobile = $('#mobile').val()
+    $.ajax({
+      type: 'GET',
+      dataType: "jsonp",
+      url: "https://user.iclient.ifeng.com/Pyramid_Api_Sharesignin/setPhoneByCoupon?phone="+ mobile + "&coupon=" + COUPON,
+      success: cb
+    })
+  }
+
+  function clickToNext() {
+    var mobile = $('#mobile').val()
+    if($.trim(mobile) == '') {
+      showTip('请填写手机号')
+      return
+    }
+    if(!(/^1[34578]\d{9}$/.test(mobile))) {
+     showTip('手机号格式有误, 请重新输入')
+     $('#mobile').val('').focus();
+     return
+   }
+   showLoading()
+   checkMobile(mobile, function(data) {
+     if(data.code) {
+       checkIsGet(function(data) {
+         hideLoading()
+         if(data.code == '200') {
+           showTip('您已经注册过凤凰新闻账号，您可以直接前往客户端登录领取红包', upApp)
+         } else {
+           showTip('您已经领取过凤凰新闻客户端新手红包奖励啊~现在凤凰新闻还有好多红包雨，快去抢吧', upApp)
+         }
+       })
+     } else {
+       hideLoading()
+       showContainer()
+     }
+   })
+  }
+
+
+  //设置定时器
+  let TIME;
+  function startInterval() {
+    clearInterval(TIME)
+    $('#reSendCode').hide()
+    $('#waitResend').show().find('#time').text(60)
+    TIME = setInterval(function() {
+      $('#time').text(parseInt($('#time').text()) - 1)
+      if (parseInt($('#time').text()) == 0) {
+        clearInterval(TIME)
+        $('#reSendCode').show()
+        $('#waitResend').hide().find('#time').text(60)
+      }
+    }, 1000)
+  }
+
+  function clickToRegister() {
+    var mobile = $('#mobile').val()
+    var codeNum = $('#codeNum').val()
+    var password = $('#password').val()
+    showLoading()
+    registerNum(mobile, codeNum, password, function(data) {
+      if(data.code) {
+        checkIsGet(function() {
+          hideLoading()
+          showRegisterSuccess()
+        })
+      } else {
+        hideLoading()
+        showTip(data.message)
+      }
+    })
+  }
+
+  //showRegisterSuccess()
+  function showRegisterSuccess() {
+    $('.i-luck').show()
+    $('.i-mask').on('click', function() {
+      $('.i-luck').hide()
+      location.reload()
+    })
+    $('.i-reward').on('click', function(e) {
+      e.stopPropagation()
+      e.preventDefault()
+    })
+    $('.i-reward-close').on('click', function(e) {
+      $('.i-luck').hide()
+      location.reload()
+    })
+    $('.i-reward-btn').on('click', function() {
+      // 拉起客户端下载
+      upApp();
+      // 并发action统计，需要type和ref
+      statistics({
+        action: {
+          type: 'yhbyxz',
+          ref: 'https://share.iclient.ifeng.com/employee'
+        }
+      });
+    })
+  }
+
+  function clickToSendMsg() {
+    var mobile = $('#mobile').val()
+    var auth = $('#auth').val()
+    showLoading()
+    sendMsg(mobile, auth, function(data) {
+      hideLoading()
+      if (data.code) {
+        closeContainer()
+        toNext()
+        startInterval()
+      } else {
+        //图形验证码错误啥的
+        alert(data.message)
+        changeImg()
+        //showContainer()
+      }
+    })
+  }
+
+  function toNext() {
+    $('#display').show()
+    $('#next').hide()
+    $('#register').show()
+    $('.register .input.num').hide()
+  }
+
+  function changeImg() {
+    $('#authImg').html('<img src="https://id.ifeng.com/index.php/public/authcode?so=7"/>')
+    $('#auth').val('').focus()
+  }
+
+  $('#mask').on('click', closeContainer)
+  $('#mask .container').on('click', function(e) {
+    e.stopPropagation()
+    e.preventDefault()
+  })
+
+  //点击图片更换图片
+  $('#authImg').on('click', function() {
+    $(this).find('img').attr('src', 'https://id.ifeng.com/index.php/public/authcode?so=7')
+  })
+
+  //点击发送验证手机是否存在
+  $('#next').on('click', clickToNext)
+
+  $('#sure').on('click', clickToSendMsg)
+
+  $('#register').on('click', clickToRegister)
+
+  //再次发送
+  $('#reSendCode').on('click', showContainer)
+
+
+
+ //income list
+ function intervalFn(incomes){
+    var timer;
+    var incomeTail=[];
+    incomes.forEach(function(ele,index){
+      if(!ele.fee){
+        return;
+      }
+      var nickname = ele.user_nickname.split('_')[0]
+      var userImg = ele.user_img || 'https://p1.ifengimg.com/redbag/images/user-default.png'
+        $content = $(
+        '<li>' +
+          '<div class="imgContainer">' +
+            '<img src="'+ userImg +'"/>' +
+          '</div>' +
+          '<span class="txt-wrap">'+
+            '<span class="name">'+ nickname +'</span>' +
+            '<span class="time">'+ getDateDiff(ele.ctime) +'</span>' +
+          '</span>' +
+          '<span class="money">'+'提现'+'<strong>'+ parseFloat(ele.fee/100)+'</strong>元</span>' +
+        '</li>'
+      );
+      if(index<5){
+        $('#account').prepend($content);
+        //$content.fadeIn()
+      }else{
+        incomeTail.push($content);
+      }
+    });
+    if(incomeTail.length){
+      incomeTail=incomeTail.reverse();
+      timer=setInterval(function(){
+        if(incomeTail.length==0){clearInterval(timer);}
+        var item=incomeTail.pop();
+        $('#account').prepend(item);
+        //$(item).fadeIn();
+      },2000);
+    }
+   }
+})
+</script>
+<!--处理返回按键到手凤首页-->
+<script>
+(function(){
+  var historyBack = {
+    locUrl : location.href,// 当前地址
+    query : /(backward)/.test(location.href),// 参数，根据情况改变
+    anchor : /(backhead)/.test(location.href),// 锚点改变url的锚点，根据情况改变
+    sharePage : 'http://localhost:3000/middle.html',// 同域中间页
+    indexPage : function(){ // 防止一直添加锚点
+      var t = this.anchor ? this.locUrl : this.locUrl + '#backhead';
+      return t;
+    },
+    init : function(){
+      if(window.history && window.history.pushState){
+          window.onpopstate = function(event) { // 触发回退
+              try{
+                "index" === event.state.page && location.reload(); // if index reload
+              }catch(e){}
+          };
+          if(this.query && !this.anchor){// 防止在浏览器中forward又pushState一遍
+            history.replaceState({
+                page:"index"
+            },null,this.sharePage);
+            history.pushState({
+                page:"share"
+            },null,this.indexPage());
+          }
+      }
+    }
+  }
+  historyBack.init();
+})();
+</script>
+
+
+​
