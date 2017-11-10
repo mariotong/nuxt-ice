@@ -25,3 +25,8 @@ export const fetchImage = async (url, key) => {
     })
   })
 }
+
+//获取token
+export const uptoken = () => {
+  return new qiniu.rs.PutPolicy(bucket).token()
+}

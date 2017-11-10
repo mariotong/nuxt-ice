@@ -33,6 +33,7 @@
     "nuxt": "~1.0.0-alpha1",
     "pug": "^2.0.0-rc.2",
     "qiniu": "6.1.13",
+    "qiniu-js": "^1.0.22",
     "qiniu-web-uploader": "^2.1.2",
     "random-token": "^0.0.8",
     "raw-body": "^2.2.0",

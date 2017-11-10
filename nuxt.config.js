@@ -17,6 +17,15 @@ module.exports = {
       },
       {
         src: 'http://res.wx.qq.com/open/js/jweixin-1.2.0.js'
+      },
+      {
+        src: 'http://jssdk.demo.qiniu.io/bower_components/plupload/js/moxie.js'
+      },
+      {
+        src: 'http://jssdk.demo.qiniu.io/bower_components/plupload/js/plupload.dev.js'
+      },
+      {
+        src: 'http://jssdk.demo.qiniu.io/dist/qiniu.min.js'
       }
     ]
   },
