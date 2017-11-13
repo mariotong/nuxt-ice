@@ -7,26 +7,33 @@ import { signature, redirect, oauth } from '../controllers/wechat'
 
 @controller('')
 export class WechatController {
+  @get('/wechat-hear')
+  async wechatHear(ctx, next) {
+    const middle = wechatMiddle(config.wechat, reply)
+    const body = await middle(ctx, next)
+    console.log(body)
+    ctx.body = body
+  }
+
   @post('/wechat-hear')
   async wechatHear(ctx, next) {
     const middle = wechatMiddle(config.wechat, reply)
-    await middle(ctx, next)
-
-    //ctx.body = body
+    const body = await middle(ctx, next)
+    ctx.body = body
   }
 
   @get('/wechat-redirect')
   async wechatRedirect(ctx, next) {
-    redirect(ctx, next)
+    await redirect(ctx, next)
   }
 
   @get('/wechat-signature')
   async wechatSignature(ctx, next) {
-    signature(ctx, next)
+    await signature(ctx, next)
   }
 
   @get('/wechat-oauth')
   async wechatOAuth(ctx, next) {
-    oauth(ctx, next)
+    await oauth(ctx, next)
   }
 }

@@ -12,6 +12,10 @@ class Services {
     return axios.get(`${baseUrl}/wechat-oauth?url=${url}`)
   }
 
+  getWechatOAuth (url) {
+    return axios.get(`${baseUrl}/wechat-oauth?url=${encodeURIComponent(url)}`)
+  }
+  
   fetchHouses() {
     return axios.get(`${baseUrl}/wiki/houses`)
   }

@@ -46,7 +46,7 @@ export default class WechatOAuth {
     const data = await this.request({
       url
     })
-    console.log('userInfo是啥来着', data)
+    //console.log('userInfo是啥来着', data)
     return data
   }
 

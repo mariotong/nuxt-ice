@@ -7,6 +7,7 @@ export default {
   products: {},
   currentProduct: {},
   user: null,
+  authUser: null,
   imageCDN: 'http://oy9al01jo.bkt.clouddn.com/',
   detailImgApi: '?imageView2/1/w/280/h/440/q/75|watermark/2/text/6YOR56OK5byA5Y-R/font/5b6u6L2v6ZuF6buR/fontsize/500/fill/I0VGRUZFRg==/dissolve/59/gravity/SouthEast/dx/10/dy/10',
   cities: [

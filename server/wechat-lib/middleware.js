@@ -20,10 +20,11 @@ export default function(opts, reply) {
     const sha = sha1(str)
 
     if (ctx.method === 'GET') {
+      console.log(sha, signature)
       if (sha == signature) {
-        ctx.body = echostr
+        return echostr
       } else {
-        ctx.body = 'Failed'
+        return 'Failed'
       }
     } else if (ctx.method === 'POST') {
       if (sha !== signature) {
@@ -51,7 +52,7 @@ export default function(opts, reply) {
       console.log('replyBody', replyBody)
       console.log('msg', msg)
       console.log('xml', xml)
-      
+
       ctx.status = 200
       ctx.type = 'application/xml'
       ctx.body = xml

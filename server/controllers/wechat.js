@@ -22,8 +22,9 @@ export async function redirect(ctx, next) {
   let redirect = config.SITE_ROOT_URL + '/oauth'
   //let redirect = 'http://mariotong.viphk.ngrok.org/oauth'
   let scope = 'snsapi_userinfo'
-  const {a, b} = ctx.query
-  const params = `${a}_${b}`
+  const { visit, id } = ctx.query
+  console.log(visit, id)
+  const params = id ? `${visit}_${id}` : visit
 
   const url = api.wechat.getAuthorizeURL(scope, redirect, params)
 
@@ -31,6 +32,7 @@ export async function redirect(ctx, next) {
 }
 
 export async function oauth(ctx, next) {
+  console.log('第一步oauth,拿到url', ctx.query.url)
   let url = ctx.query.url
 
   url = decodeURIComponent(url)
@@ -40,6 +42,8 @@ export async function oauth(ctx, next) {
   const code = params.code
   const user = await api.wechat.getUserByCode(code)
 
+  console.log('第二部拿到user的信息并返回', user)
+  ctx.session.user = user
   ctx.body = {
     success: true,
     data: user

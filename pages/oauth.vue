@@ -1,29 +1,33 @@
 <template lang="pug">
-  .container
+  .container 授权页面
 </template>
 <script>
-import { mapState } from 'vuex'
+function getUrlParam (param) {
+  const reg = new RegExp('(^|&)' + param + '=([^&]*)(&|$)')
+  const result = window.location.search.substr(1).match(reg)
+
+  return result ? decodeURIComponent(result[2]) : null
+}
 
 export default {
-  asyncData ({ req }) {
-    return {
-      name: req ? 'server' : 'client'
-    }
-  },
   head () {
     return {
-      title: `认证页面`
+      title: `loading`
     }
   },
-  beforeMount() {
-    const url = encodeURIComponent(window.location.href)
+  async beforeMount() {
+    const url = window.location.href
+    const { data } = await this.$store.dispatch('getWechatOAuth', url)
 
-    this.$store.dispatch('getUserByOAuth', url).then(res => {
-      if(res.data.success) {
-        const params = res.data.params
-        console.log(res.data)
+    if (data.success) {
+        await this.$store.dispatch('setAuthUser', data.data)
+        const paramsArr = getUrlParam('state').split('_')
+        const visit = paramsArr.length === 1 ? `/${paramsArr[0]}` : `/${paramsArr[0]}?id=${paramsArr[1]}`
+
+        this.$router.replace(visit)
+      } else {
+        throw new Error('用户信息获取失败')
       }
-    })
 
   }
 }
