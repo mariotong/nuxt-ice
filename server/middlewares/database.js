@@ -38,12 +38,28 @@ export const database = app => {
 
     const WikiHouse = mongoose.model('WikiHouse')
     const WikiCharacter = mongoose.model('WikiCharacter')
+    const User =  mongoose.model('User')
 
     const existWikiHouses = await WikiHouse.find({}).exec()
     const existWikiCharacters = await WikiCharacter.find({}).exec()
 
     if(!existWikiHouses.length) WikiHouse.insertMany(wikiHouses)
     if(!existWikiCharacters.length) WikiCharacter.insertMany(wikiCharacters)
+
+    let user = await User.findOne({
+      email: '424514340@qq.com'
+    }).exec()
+
+    if (!user) {
+      console.log('写入管理员数据')
+      user = new User({
+        email: '424514340@qq.com',
+        password: '424514340',
+        role: 'admin'
+      })
+
+      await user.save()
+    }
 
   })
 }
