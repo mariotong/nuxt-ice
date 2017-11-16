@@ -15,8 +15,8 @@ const formatData = R.map(i => {
   return i
 })
 
-let wikiCharacters = require(resolve(__dirname, '../../completeCharacters.json'))
-let wikiHouses = require(resolve(__dirname, '../../completeHouses.json'))
+let wikiCharacters = require(resolve(__dirname, '../database/iceWikiJson/completeCharacters.json'))
+let wikiHouses = require(resolve(__dirname, '../database/iceWikiJson/completeHouses.json'))
 wikiCharacters = formatData(wikiCharacters)
 
 export const database = app => {
