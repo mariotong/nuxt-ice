@@ -9,14 +9,18 @@ export class EduController {
 
   @get('/')
   async getHome(ctx, next) {
-    axios({
+
+    let { data } = await axios({
       url: `${apiUrl}/`,
       method: ctx.method,
       headers: ctx.header
-    }).then((res) => {
-      api.edu.saveIndexJson(res.data)
-      ctx.body = res.data
     })
+
+    api.edu.saveIndexJson(data)
+
+    console.log(data)
+
+    ctx.body = data
   }
 
 }
