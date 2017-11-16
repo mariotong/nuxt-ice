@@ -1,0 +1,123 @@
+[
+  {
+    "title": "班级类型",
+    "classlist": [
+      {
+        "name": "免费试听",
+        "id": "is_free=1"
+      },
+      {
+        "name": "随时插班",
+        "id": "is_transfer=1"
+      },
+      {
+        "name": "随时退班",
+        "id": "retreat_rule=1"
+      },
+      {
+        "name": "未开课",
+        "id": "is_openClass=1"
+      }
+    ]
+  },
+  {
+    "title": "活动优惠",
+    "classlist": [
+      {
+        "name": "连报优惠",
+        "id": "is_discount=1"
+      },
+      {
+        "name": "限时团购",
+        "id": "is_groupPurchase=1"
+      },
+      {
+        "name": "折扣",
+        "id": "is_discountRate=1"
+      },
+      {
+        "name": "立减",
+        "id": "is_minus=1"
+      }
+    ]
+  },
+  {
+    "title": "上课时间",
+    "classlist": [
+      {
+        "name": "周一",
+        "id": "goods_week=3-1"
+      },
+      {
+        "name": "周二",
+        "id": "goods_week=3-2"
+      },
+      {
+        "name": "周三",
+        "id": "goods_week=3-3"
+      },
+      {
+        "name": "周四",
+        "id": "goods_week=3-4"
+      },
+      {
+        "name": "周五",
+        "id": "goods_week=3-5"
+      },
+      {
+        "name": "周六",
+        "id": "goods_week=3-6"
+      },
+      {
+        "name": "周日",
+        "id": "goods_week=3-7"
+      }
+    ]
+  },
+  {
+    "title": "具体时间",
+    "classlist": [
+      {
+        "name": "上午",
+        "id": "is_detailTime=1"
+      },
+      {
+        "name": "下午",
+        "id": "is_detailTime=2"
+      },
+      {
+        "name": "晚上",
+        "id": "is_detailTime=3"
+      }
+    ]
+  },
+  {
+    "title": "价格区间",
+    "classlist": [
+      {
+        "name": "0～1000",
+        "id": "0.00^1000.00"
+      },
+      {
+        "name": "1000～3000",
+        "id": "1000.00^3000.00"
+      },
+      {
+        "name": "3000～5000",
+        "id": "3000.00^5000.00"
+      },
+      {
+        "name": "5000～7000",
+        "id": "5000.00^7000.00"
+      },
+      {
+        "name": "7000～9000",
+        "id": "7000.00^9000.00"
+      },
+      {
+        "name": "9000以上",
+        "id": "9000.00^10000000.00"
+      }
+    ]
+  }
+]

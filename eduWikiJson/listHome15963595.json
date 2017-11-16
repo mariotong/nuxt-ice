@@ -1,0 +1,274 @@
+{
+  "gradeOne": [
+    {
+      "gradeId": 15963587,
+      "class_name": "艺术"
+    },
+    {
+      "gradeId": 15963588,
+      "class_name": "体育"
+    },
+    {
+      "gradeId": 15963589,
+      "class_name": "语言"
+    },
+    {
+      "gradeId": 15963590,
+      "class_name": "留学"
+    },
+    {
+      "gradeId": 15963591,
+      "class_name": "小学"
+    },
+    {
+      "gradeId": 15963592,
+      "class_name": "小升初"
+    },
+    {
+      "gradeId": 15963593,
+      "class_name": "初中"
+    },
+    {
+      "gradeId": 15963594,
+      "class_name": "中考"
+    },
+    {
+      "gradeId": 15963595,
+      "class_name": "高中"
+    },
+    {
+      "gradeId": 15963596,
+      "class_name": "益智"
+    },
+    {
+      "gradeId": 15963597,
+      "class_name": "高考"
+    },
+    {
+      "gradeId": 15963598,
+      "class_name": "学前"
+    },
+    {
+      "gradeId": 15963599,
+      "class_name": "营地"
+    },
+    {
+      "gradeId": 15963600,
+      "class_name": "其它"
+    }
+  ],
+  "gradeTwo": [
+    {
+      "gradeTwoId": 25963615,
+      "twoClass_name": "高一",
+      "pid": "15963595"
+    },
+    {
+      "gradeTwoId": 25963616,
+      "twoClass_name": "高二",
+      "pid": "15963595"
+    },
+    {
+      "gradeTwoId": 25963617,
+      "twoClass_name": "高三",
+      "pid": "15963595"
+    }
+  ],
+  "gradeThree": [
+    {
+      "gradeThreeId": 35963821,
+      "threeClass_name": "数学",
+      "pid": "25963615"
+    },
+    {
+      "gradeThreeId": 35963822,
+      "threeClass_name": "语文",
+      "pid": "25963615"
+    },
+    {
+      "gradeThreeId": 35963823,
+      "threeClass_name": "英语",
+      "pid": "25963615"
+    },
+    {
+      "gradeThreeId": 35963824,
+      "threeClass_name": "政治",
+      "pid": "25963615"
+    },
+    {
+      "gradeThreeId": 35963825,
+      "threeClass_name": "物理",
+      "pid": "25963615"
+    },
+    {
+      "gradeThreeId": 35963826,
+      "threeClass_name": "化学",
+      "pid": "25963615"
+    },
+    {
+      "gradeThreeId": 35963827,
+      "threeClass_name": "地理",
+      "pid": "25963615"
+    },
+    {
+      "gradeThreeId": 35963828,
+      "threeClass_name": "历史",
+      "pid": "25963615"
+    },
+    {
+      "gradeThreeId": 35963829,
+      "threeClass_name": "生物",
+      "pid": "25963615"
+    },
+    {
+      "gradeThreeId": 35963830,
+      "threeClass_name": "奥数",
+      "pid": "25963615"
+    },
+    {
+      "gradeThreeId": 35963831,
+      "threeClass_name": "全科辅导",
+      "pid": "25963615"
+    },
+    {
+      "gradeThreeId": 35963832,
+      "threeClass_name": "信息技术",
+      "pid": "25963615"
+    },
+    {
+      "gradeThreeId": 35963833,
+      "threeClass_name": "生命科学",
+      "pid": "25963615"
+    },
+    {
+      "gradeThreeId": 35963834,
+      "threeClass_name": "数学",
+      "pid": "25963616"
+    },
+    {
+      "gradeThreeId": 35963835,
+      "threeClass_name": "语文",
+      "pid": "25963616"
+    },
+    {
+      "gradeThreeId": 35963836,
+      "threeClass_name": "英语",
+      "pid": "25963616"
+    },
+    {
+      "gradeThreeId": 35963837,
+      "threeClass_name": "政治",
+      "pid": "25963616"
+    },
+    {
+      "gradeThreeId": 35963838,
+      "threeClass_name": "物理",
+      "pid": "25963616"
+    },
+    {
+      "gradeThreeId": 35963839,
+      "threeClass_name": "化学",
+      "pid": "25963616"
+    },
+    {
+      "gradeThreeId": 35963840,
+      "threeClass_name": "地理",
+      "pid": "25963616"
+    },
+    {
+      "gradeThreeId": 35963841,
+      "threeClass_name": "历史",
+      "pid": "25963616"
+    },
+    {
+      "gradeThreeId": 35963842,
+      "threeClass_name": "生物",
+      "pid": "25963616"
+    },
+    {
+      "gradeThreeId": 35963843,
+      "threeClass_name": "奥数",
+      "pid": "25963616"
+    },
+    {
+      "gradeThreeId": 35963844,
+      "threeClass_name": "全科辅导",
+      "pid": "25963616"
+    },
+    {
+      "gradeThreeId": 35963845,
+      "threeClass_name": "信息技术",
+      "pid": "25963616"
+    },
+    {
+      "gradeThreeId": 35963846,
+      "threeClass_name": "生命科学",
+      "pid": "25963616"
+    },
+    {
+      "gradeThreeId": 35963847,
+      "threeClass_name": "数学",
+      "pid": "25963617"
+    },
+    {
+      "gradeThreeId": 35963848,
+      "threeClass_name": "语文",
+      "pid": "25963617"
+    },
+    {
+      "gradeThreeId": 35963849,
+      "threeClass_name": "英语",
+      "pid": "25963617"
+    },
+    {
+      "gradeThreeId": 35963850,
+      "threeClass_name": "政治",
+      "pid": "25963617"
+    },
+    {
+      "gradeThreeId": 35963851,
+      "threeClass_name": "物理",
+      "pid": "25963617"
+    },
+    {
+      "gradeThreeId": 35963852,
+      "threeClass_name": "化学",
+      "pid": "25963617"
+    },
+    {
+      "gradeThreeId": 35963853,
+      "threeClass_name": "地理",
+      "pid": "25963617"
+    },
+    {
+      "gradeThreeId": 35963854,
+      "threeClass_name": "历史",
+      "pid": "25963617"
+    },
+    {
+      "gradeThreeId": 35963855,
+      "threeClass_name": "生物",
+      "pid": "25963617"
+    },
+    {
+      "gradeThreeId": 35963856,
+      "threeClass_name": "奥数",
+      "pid": "25963617"
+    },
+    {
+      "gradeThreeId": 35963857,
+      "threeClass_name": "全科辅导",
+      "pid": "25963617"
+    },
+    {
+      "gradeThreeId": 35963858,
+      "threeClass_name": "信息技术",
+      "pid": "25963617"
+    },
+    {
+      "gradeThreeId": 35963859,
+      "threeClass_name": "生命科学",
+      "pid": "25963617"
+    }
+  ]
+}
