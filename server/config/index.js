@@ -1,9 +1,9 @@
 export default {
   db: 'mongodb://localhost/ice',
-  SITE_ROOT_URL: 'http://5tpvxx.natappfree.cc',
+  SITE_ROOT_URL: 'http://zhenglei.natapp1.cc',
   wechat: {
-    appID: 'wx2ab2cbb86fe1cdec',
-    appSecret: '3e7224e8fd60a4ac6766a8971e3d203c',
+    appID: 'wx74bde44557280cbf',
+    appSecret: '92b919289b1f8ec9698f9bcc82138137',
     token: 'wojiaozhenglei'
   },
   qiniu: {

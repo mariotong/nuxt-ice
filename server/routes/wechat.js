@@ -19,6 +19,7 @@ export class WechatController {
   async wechatHear(ctx, next) {
     const middle = wechatMiddle(config.wechat, reply)
     const body = await middle(ctx, next)
+    console.log('返回来的body', body)
     ctx.body = body
   }
 

@@ -85,10 +85,12 @@ export default async (ctx, next) => {
       const data = await client.handle('getMenu')
       console.log(JSON.stringify(data))
     } else if (message.Content == '7') {
+      console.log('是不是到7这里面来了吗')
       const menu = require('./menu').default
       await client.handle('delMenu')
+      console.log('删除成功了吗')
       const data = await client.handle('createMenu', menu)
-      console.log(JSON.stringify(data))
+      console.log('创建成功了吗', JSON.stringify(data))
     } else if (message.Content == '8') {
 
     }

@@ -21,7 +21,7 @@ export default {
   }, {
     'name': '冰火家族',
     'type': 'view',
-    'url': 'https://www.baidu.com'
+    'url': 'http://zhenglei.natapp1.cc/'
   }, {
     'name': '最新资源',
     'type': 'location_select',

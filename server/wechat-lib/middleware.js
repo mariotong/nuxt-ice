@@ -38,6 +38,7 @@ export default function(opts, reply) {
         encoding: ctx.charset
       })
 
+
       const content = await util.parseXML(data)
       const message = util.formatMessage(content.xml)
 
@@ -55,7 +56,7 @@ export default function(opts, reply) {
 
       ctx.status = 200
       ctx.type = 'application/xml'
-      ctx.body = xml
+      return xml
     }
   }
 }
