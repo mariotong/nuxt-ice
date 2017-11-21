@@ -67,7 +67,7 @@ export class EduController {
     ctx.body = data
   }
 
-  @get('/isexistCard/:_id')
+  @get('/isexistCart/:_id')
   async isexistCard(ctx, next) {
     const { params } = ctx
     const { _id } = params
